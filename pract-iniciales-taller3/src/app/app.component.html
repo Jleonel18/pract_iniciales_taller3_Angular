@@ -1,0 +1,99 @@
+
+<div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Edad</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuarios of usuarioModel">
+          <th scope="row">{{usuarios._id}}</th>
+          <td>{{usuarios.nombre}}</td>
+          <td>{{usuarios.apellido}}</td>
+          <td>{{usuarios.edad}}</td>
+          <td>
+            <button (click)="eliminar(usuarios._id)" class="btn btn-danger" style="margin: 5px">Eliminar</button>
+            <button (click)="asignarUsuario(usuarios._id,usuarios.nombre,usuarios.apellido,usuarios.edad)" class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#modalEditar">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalRegistrar">
+  Agregar Usuario
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="registrar()">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" name="nombre" class="form-control" id="inputNombre" #nombre = "ngModel" [(ngModel)]="usuarioNuevo.nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Apellido</label>
+            <input type="text" name="apellido" class="form-control" id="inputApellido" #apellido= "ngModel" [(ngModel)]="usuarioNuevo.apellido" placeholder="Ingrese apellido">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Edad</label>
+            <input type="text" name="edad" class="form-control" id="inputEdad" #edad="ngModel" [(ngModel)]="usuarioNuevo.edad" placeholder="Ingrese edad">
+          </div>
+          <button data-bs-dismiss="modal" style="margin: 5px" type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="editar(idEncontrada)">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" name="nombre" class="form-control" id="inputNombre" #nombre = "ngModel" [(ngModel)]="usuarioEditado.nombre" aria-describedby="emailHelp" placeholder="Ingrese nombre">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Apellido</label>
+            <input type="text" name="apellido" class="form-control" id="inputApellido" #apellido= "ngModel" [(ngModel)]="usuarioEditado.apellido" placeholder="Ingrese apellido">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Edad</label>
+            <input type="text" name="edad" class="form-control" id="inputEdad" #edad="ngModel" [(ngModel)]="usuarioEditado.edad" placeholder="Ingrese edad">
+          </div>
+          <button data-bs-dismiss="modal" style="margin: 5px" type="submit" class="btn btn-primary">Editar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
